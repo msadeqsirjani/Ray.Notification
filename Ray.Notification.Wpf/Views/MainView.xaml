@@ -1,0 +1,187 @@
+﻿<Window x:Name="Window" 
+        x:Class="Ray.Notification.Wpf.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        mc:Ignorable="d"
+        DataContext="{Binding Main, Source={StaticResource Locator} }"
+        Title="Main" 
+        Height="400.16" 
+        Width="570.35" 
+        AllowsTransparency="True"  
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent" 
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Fonts/#Shabnam"
+        ShowInTaskbar="False">
+    <Window.Resources>
+        <Storyboard x:Key="Load">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CircleEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2.1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Window">
+                <DiscreteObjectKeyFrame KeyTime="0:0:2.1" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="TryToolTipImageAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="image1">
+                <EasingDoubleKeyFrame KeyTime="0" Value="270"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BackEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Load}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid>
+        <Image x:Name="image" Source="/Ray.Notification.Wpf;component/Images/eoa.png"  />
+        <tb:TaskbarIcon x:Name="tbTaskBarIcon" 
+                        DoubleClickCommand="{Binding OpenNotificationsCommand}" 
+                        TrayToolTipOpen="TaskBarIcon_TrayToolTipOpen" 
+                        IconSource="/Images/eoa.ico">
+            <tb:TaskbarIcon.TrayToolTip>
+                <Border Width="350" 
+                        Height="130" 
+                        CornerRadius="10"
+                        BorderThickness="5"
+                        BorderBrush="#28A1A2"
+                        Background="White">
+                    <Border.BitmapEffect>
+                        <DropShadowBitmapEffect/>
+                    </Border.BitmapEffect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" 
+                               x:Name="image1" 
+                               Source="/Images/eoa.png" 
+                               Margin="6" 
+                               Width="85"
+                               RenderTransformOrigin="0.5,0.5" >
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </Image.RenderTransform>
+                        </Image>
+                        <Grid Grid.Column="1" Margin="6 6 6 6">
+                            <TextBlock HorizontalAlignment="Center" 
+                                       VerticalAlignment="Stretch"
+                                       TextWrapping="Wrap"
+                                       Margin="10 20">
+                                <Run FontSize="15" 
+                                     Foreground="#013244">شما </Run>
+                                <Run Text="{Binding NotificationsCount}" 
+                                     Foreground="#28A1A2" 
+                                     FontSize="18" 
+                                     FontWeight="ExtraBold"/>
+                                <Run FontSize="15" 
+                                     Foreground="#013244">اعلان خوانده نشده دارید
+                                </Run>
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </tb:TaskbarIcon.TrayToolTip>
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu Background="#28A1A2" >
+                    <MenuItem Header="ورود" 
+                              Foreground="White"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch"
+                              Command="{Binding OpenLoginViewCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Login" 
+                                                     VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="تنظیمات" 
+                              Foreground="White"
+                              VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch"
+                              Command="{Binding OpenSettingsViewCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Settings" 
+                                                     VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="خروج"
+                              Foreground="White"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Stretch"
+                              Click="MenuItem_Click">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Close" 
+                                                     VerticalAlignment="Center"
+                                                     HorizontalAlignment="Left"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+    </Grid>
+</Window>

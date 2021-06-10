@@ -1,0 +1,31 @@
+<Application x:Class="Ray.Notification.Wpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             d1p1:Ignorable="d"
+             xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:Ray.Notification.Wpf.ViewModel"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException"
+             StartupUri="Views/MainView.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ImageBrush x:Key="SettingsLogoPrincipalBrush"
+                        ImageSource="Images/eoa.png" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MLDarkStyle.xaml">
+                    <viewModel:ViewModelLocator x:Key="Locator"
+                                                d:IsDataSource="True" />
+                </ResourceDictionary>
+                <ResourceDictionary Source="Simple Styles.xaml">
+                    <vm:ViewModelLocator x:Key="Locator"
+                                         d:IsDataSource="True"
+                                         xmlns:vm="clr-namespace:Ray.Notification.Wpf.ViewModel" />
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,192 @@
+﻿<UserControl x:Class="Ray.Notification.Wpf.Views.Balloon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Ray.Notification.Wpf.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             Height="200" 
+             Width="600"
+             FontFamily="/Fonts/#Shabnam">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <Border Margin="3,3,10,10" 
+            CornerRadius="25"
+            BorderBrush="#28A1A2"
+            BorderThickness="5"
+            Background="White">
+        <Border.BitmapEffect>
+            <DropShadowBitmapEffect/>
+        </Border.BitmapEffect>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Row="0" 
+                    Grid.Column="0"
+                    CornerRadius="12"
+                    BorderThickness="2"
+                    Height="130"
+                    Width="130">
+                <Border.Background>
+                    <ImageBrush ImageSource="../Images/eoa.png"
+                                Stretch="Fill" />
+                </Border.Background>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1"
+                      Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0"
+                          Margin="0 0 25 5"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" 
+                                   Text="{Binding Action}"
+                                   Margin="0 0 15 0"
+                                   Foreground="#28A1A2" 
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                        <TextBlock Grid.Column="1" 
+                                   Text="عملیات"
+                                   Margin="0 0 15 0"
+                                   FontWeight="Bold"
+                                   Foreground="#013244" 
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                    </Grid>
+                    <Grid Grid.Row="1"
+                          Margin="0 0 25 5"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" 
+                                   Text="{Binding Header}"
+                                   Margin="0 0 15 0"
+                                   Foreground="#28A1A2" 
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                        <TextBlock Grid.Column="1" 
+                                   Text="موضوع"
+                                   Margin="0 0 15 0"
+                                   FontWeight="Bold"
+                                   Foreground="#013244" 
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                    </Grid>
+                    <Grid Grid.Row="2"
+                          Margin="0 0 25 5"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" 
+                                       Text="{Binding FromPrincipalTitle}"
+                                       Margin="0 0 15 0"
+                                       Foreground="#28A1A2" 
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14" />
+                        <TextBlock Grid.Column="1" 
+                                       Text="از"
+                                       Margin="0 0 15 0"
+                                       FontWeight="Bold"
+                                       Foreground="#013244" 
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       VerticalAlignment="Stretch"
+                                       FontSize="14" />
+                    </Grid>
+                    <Grid Grid.Row="3"
+                          Margin="0 0 25 5"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" 
+                                   Text="{Binding Title}"
+                                   Margin="0 0 15 0"
+                                   Foreground="#28A1A2" 
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                        <TextBlock Grid.Column="1" 
+                                   Text="{Binding FolderTypeDsc}"
+                                   Margin="0 0 15 0"
+                                   FontWeight="Bold"
+                                   Foreground="#013244" 
+                                   TextAlignment="Center"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                    </Grid>
+                    <Grid Grid.Row="4"
+                          Margin="0 0 25 5"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" 
+                                   Text="تاریخ و زمان ارسال"
+                                   Margin="0 0 15 0"
+                                   Foreground="#013244" 
+                                   TextAlignment="Center"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                        <TextBlock Grid.Column="0" 
+                                   Text="{Binding FancyDateTime}"
+                                   Margin="0 0 15 0"
+                                   Foreground="#28A1A2" 
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Stretch"
+                                   FontSize="14" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

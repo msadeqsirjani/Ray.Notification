@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Notification.Domain", "Ray.Notification.Domain\Ray.Notification.Domain.csproj", "{5C076819-F8CD-41D1-9AD8-E09852B844E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Notification.Service", "Ray.Notification.Service\Ray.Notification.Service.csproj", "{8096A9FF-BE2A-42C8-9390-70E94C365B25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Notification.Console", "Ray.Notification.Console\Ray.Notification.Console.csproj", "{671F005D-FA47-43CE-983E-284EE2DD30DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Notification.Client", "Ray.Notification.Client\Ray.Notification.Client.csproj", "{0CF7F418-4732-4BE9-9FA6-746CA351A6E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Notification.Wpf", "Ray.Notification.Wpf\Ray.Notification.Wpf.csproj", "{E9BEEC23-0E10-4800-9417-01351398AEBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ray.Notification.Common", "Ray.Notification.Common\Ray.Notification.Common.csproj", "{39463B27-896B-497C-A032-A1AC062FE3A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C076819-F8CD-41D1-9AD8-E09852B844E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C076819-F8CD-41D1-9AD8-E09852B844E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C076819-F8CD-41D1-9AD8-E09852B844E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C076819-F8CD-41D1-9AD8-E09852B844E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8096A9FF-BE2A-42C8-9390-70E94C365B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8096A9FF-BE2A-42C8-9390-70E94C365B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8096A9FF-BE2A-42C8-9390-70E94C365B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8096A9FF-BE2A-42C8-9390-70E94C365B25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{671F005D-FA47-43CE-983E-284EE2DD30DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{671F005D-FA47-43CE-983E-284EE2DD30DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{671F005D-FA47-43CE-983E-284EE2DD30DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{671F005D-FA47-43CE-983E-284EE2DD30DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CF7F418-4732-4BE9-9FA6-746CA351A6E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CF7F418-4732-4BE9-9FA6-746CA351A6E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CF7F418-4732-4BE9-9FA6-746CA351A6E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CF7F418-4732-4BE9-9FA6-746CA351A6E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9BEEC23-0E10-4800-9417-01351398AEBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9BEEC23-0E10-4800-9417-01351398AEBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9BEEC23-0E10-4800-9417-01351398AEBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9BEEC23-0E10-4800-9417-01351398AEBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39463B27-896B-497C-A032-A1AC062FE3A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39463B27-896B-497C-A032-A1AC062FE3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39463B27-896B-497C-A032-A1AC062FE3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39463B27-896B-497C-A032-A1AC062FE3A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25118C16-4145-4868-BF7B-53062C74C0B2}
+	EndGlobalSection
+EndGlobal
