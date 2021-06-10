@@ -1,5 +1,5 @@
 ﻿using Ray.Notification.Client;
-using Ray.Notification.Common.Convertor;
+using Ray.Notification.Common.Convertors;
 using Ray.Notification.Domain;
 using System;
 using System.Threading;

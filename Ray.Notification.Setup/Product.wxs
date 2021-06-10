@@ -1,30 +1,174 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Ray.Notification.Setup" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="4513f68a-1433-410c-b742-2f0bb3cfe1b7">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <Product Id="*"
+           Name="Rayvarz Notification Service"
+           Language="1033"
+           Version="1.0.0.0"
+           Manufacturer="Andishe Novin Rayvarz"
+           UpgradeCode="785F04A9-DA3A-4D35-8144-EC2B39FF63AA">
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <Media Id="1" Cabinet="Ray.Scanner.cab" EmbedCab="yes" CompressionLevel="high" />
 
-		<Feature Id="ProductFeature" Title="Ray.Notification.Setup" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+    <Icon Id="icon.ico" SourceFile="..\Ray.Notification.Wpf\Images\eoa.ico" />
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Ray.Notification.Setup" />
-			</Directory>
-		</Directory>
-	</Fragment>
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
-		</ComponentGroup>
-	</Fragment>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+    <WixVariable Id="WixUILicenseRtf" Value="..\Ray.Notification.Wpf\Setup\license.rtf" />
+
+    <Feature Id="ProductFeatures" Title="Rayvarz Scanner Windows Service" Level="1">
+      <ComponentGroupRef Id="Ray_DependencyFiles" />
+      <ComponentGroupRef Id="Ray_ConfigFiles" />
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
+    </Feature>
+  </Product>
+
+  <!--Install Folder C:\Program Files(x86)\Rayvarz Notification Service\-->
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Rayvarz Notification Service"/>
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop"/>
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Rayvarz Notification Service" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+  <!--DEPENDENCY FILES-->
+  <Fragment>
+    <ComponentGroup Id="Ray_DependencyFiles" Directory="INSTALLFOLDER">
+      <Component Guid="F7E041AB-3227-4272-92C1-4A12685F30AF" >
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Ray.Notification.Wpf.exe" KeyPath="yes"/>
+      </Component>
+      <Component Guid="CB0604BE-202F-4A0B-BBEF-F4C962CE463A">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)CommonServiceLocator.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="{09D650B7-7C18-483E-8F97-2C362A5429F9}">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)RestSharp.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="647DC523-370A-4DB8-B29B-B47A646B3A28">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Autofac.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="D525B574-1542-4499-B31F-7BCAA506C02B">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Autofac.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="9EFFEBF8-8679-470A-AAD3-E71FEE167674">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)GalaSoft.MvvmLight.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="4E8024BC-2F29-4F34-9E2D-7F47DE5FB39D">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)GalaSoft.MvvmLight.Extras.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="C6A0FC1B-ED92-4098-8610-AF35B745EF49">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)GalaSoft.MvvmLight.Extras.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="A0A6C105-7040-4704-A561-F22E6CCBC206">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)GalaSoft.MvvmLight.Platform.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="E0735752-543E-4A49-8550-51C0875C9CCF">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)GalaSoft.MvvmLight.Platform.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="469AFD9F-F4BC-4D52-BC6E-C094422B6887">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)GalaSoft.MvvmLight.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="0DEDFA68-7A4E-4C34-B334-F144806F8AB2">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Hardcodet.NotifyIcon.Wpf.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="1A9570C6-5479-47CE-BCB6-D2B458C11932">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Hardcodet.NotifyIcon.Wpf.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="B6455F21-22FB-47DA-BD4E-38C18254374D">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)MaterialDesignColors.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="A2AA1AB7-953E-4650-9A48-AAF598FE840C">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)MaterialDesignThemes.Wpf.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="1668B2B0-92C9-4554-9B54-1806D1EE0203">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)MaterialDesignThemes.Wpf.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="95241622-4D04-4574-B73C-EA09313A3B64">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Microsoft.AspNet.SignalR.Client.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="8D42E231-4736-44F2-8CEB-3616C115F04F">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Microsoft.AspNet.SignalR.Client.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="1D42EAF6-A6FD-45EE-8909-9294D9762E10">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Newtonsoft.Json.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="79780482-FADA-4781-AF99-665D4F79EBD0">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Newtonsoft.Json.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="CE55C9DF-7601-4E5B-B1D6-49A3EFD420F6">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Ray.Notification.Client.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="FD6C1934-0BEE-49E3-A155-313A106E4A0C">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Ray.Notification.Client.dll.config" KeyPath="yes"/>
+      </Component>
+      <Component Guid="E61C8511-79E5-4F84-8701-7BB465717C58">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Ray.Notification.Common.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="52297C11-A1AA-4A4C-8155-131EFB1C8069">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Ray.Notification.Domain.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="5FD08B68-1E41-4242-B20E-B695F6D1682A">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Configuration.ConfigurationManager.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="3BE40E69-4034-4E53-A23A-537F19D7809C">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Configuration.ConfigurationManager.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="DF299D84-E63A-4556-BE4D-17CAC4601A13">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Security.AccessControl.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="5F04E8FE-DB73-45FE-AA70-596A030B94FF">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Security.AccessControl.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="811EFF3E-2D5D-4085-8618-F1C8B2690B5C">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Security.Permissions.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="B29ED061-AEE6-40E8-A888-8C8ECA28EA28">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Security.Permissions.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="946C0A53-5A19-421B-AF89-E89CA6488EE9">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Security.Principal.Windows.dll" KeyPath="yes"/>
+      </Component>
+      <Component Guid="EAC719E9-A9EC-4526-AD5A-3AFB7FBAA395">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Security.Principal.Windows.xml" KeyPath="yes"/>
+      </Component>
+      <Component Guid="83CA459D-0F87-4564-BD2A-60B01B769919">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)System.Windows.Interactivity.dll" KeyPath="yes"/>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <!--CONFIG FILES-->
+  <Fragment>
+    <ComponentGroup Id="Ray_ConfigFiles" Directory="INSTALLFOLDER">
+      <Component Guid="17C70FC2-4AF5-4381-9FBE-B9C4D062E74A" NeverOverwrite="yes" Permanent="yes">
+        <File Source="$(var.Ray.Notification.Wpf.TargetDir)Ray.Notification.Wpf.exe.config" KeyPath="yes"/>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <!--Shortcut-->
+  <Fragment>
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="9bd13330-6540-406f-a3a8-d7f7c69ae7f9">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="Rayvarz Notification Service" Description="Rayvarz Notification Service" Target="[INSTALLFOLDER]Ray.Notification.Wpf.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveApplicationProgramsFolder" Directory="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Rayvarz Notification Service" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="ApplicationShortcutDesktop" Guid="cde1e030-eb64-49a5-b7b8-400b379c2d1a">
+        <Shortcut Id="ApplicationDesktopShortcut" Name="Rayvarz Notification Service" Description="Rayvarz Notification Service" Target="[INSTALLFOLDER]Ray.Notification.Wpf.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="RemoveDesktopFolder" Directory="DesktopFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Rayvarz Notification Service" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>
 </Wix>

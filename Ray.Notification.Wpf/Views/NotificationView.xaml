@@ -8,7 +8,7 @@
         x:Name="Window" 
         x:Class="Ray.Notification.Wpf.Views.NotificationView"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="نرم افزار اعلان رایورز"
         Height="900"
         Width="400"
         FontFamily="Fonts/#Shabnam"

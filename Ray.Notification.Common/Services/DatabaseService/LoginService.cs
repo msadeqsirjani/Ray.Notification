@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace Ray.Notification.Common.Services
+namespace Ray.Notification.Common.Services.LoginService
 {
-    public class LoginService
+    public class LoginService : ILoginService
     {
         public AuthorizationModel GetAuthenticationToken(string username, string password)
         {

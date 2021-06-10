@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Ray.Notification.Client;
-using Ray.Notification.Common.Services;
+using Ray.Notification.Common.Services.LoginService;
 using Ray.Notification.Wpf.Login;
 using Ray.Notification.Wpf.Settings;
 using Ray.Notification.Wpf.Views;

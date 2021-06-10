@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Ray.Notification.Common.Convertor;
+using Ray.Notification.Common.Convertors;
 using System;
 
 namespace Ray.Notification.Domain

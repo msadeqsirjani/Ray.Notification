@@ -1,4 +1,4 @@
-﻿namespace Ray.Notification.Common.Convertor
+﻿namespace Ray.Notification.Common.Convertors
 {
     public static class PersianCharacterConvertor
     {

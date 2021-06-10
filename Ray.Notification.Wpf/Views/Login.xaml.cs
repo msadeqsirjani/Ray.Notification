@@ -1,4 +1,4 @@
-﻿using Ray.Notification.Common.Services;
+﻿using Ray.Notification.Common.Services.LoginService;
 using Ray.Notification.Wpf.Login;
 using System;
 using System.Windows;

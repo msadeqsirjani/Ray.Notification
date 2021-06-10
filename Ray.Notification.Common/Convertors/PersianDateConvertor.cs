@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Ray.Notification.Common.Convertor
+namespace Ray.Notification.Common.Convertors
 {
     public static class PersianDateConvertor
     {
