@@ -21,7 +21,7 @@ namespace Ray.Notification.Wpf.Settings
             }
             else
             {
-                result = new SettingsInfo { ServiceAddress = "http://localhost:11111", SecondsVisibilityBalloonTime = 4, ShowBalloonWithNotificationsOpen = false };
+                result = new SettingsInfo { SecondsVisibilityBalloonTime = 4, ShowBalloonWithNotificationsOpen = false };
 
                 _fileSettingsManager.WriteSettingsFile(SettingsGlobalData.PathFileSettingsName, result);
             }

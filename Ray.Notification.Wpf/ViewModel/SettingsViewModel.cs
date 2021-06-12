@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Ray.Notification.Client;
-using Ray.Notification.Common.Services.LoginService;
-using Ray.Notification.Wpf.Login;
+using Ray.Notification.Common.Services.DatabaseManager;
+using Ray.Notification.Common.Services.WebConnector;
+using Ray.Notification.Common.Utils;
 using Ray.Notification.Wpf.Settings;
 using Ray.Notification.Wpf.Views;
 using System;
@@ -13,16 +14,17 @@ namespace Ray.Notification.Wpf.ViewModel
 {
     public class SettingsViewModel : ViewModelBase
     {
-
+        private readonly DatabaseManager _databaseManager;
         private readonly ISettingsManager _settingsManager;
-        private readonly LoginService _loginService;
+        private readonly IWebConnectorService _webConnectorService;
 
         public event EventHandler SavedSettings;
 
-        public SettingsViewModel(ISettingsManager settingsManager)
+        public SettingsViewModel(ISettingsManager settingsManager, DatabaseManager databaseManager, IWebConnectorService webConnectorService)
         {
             _settingsManager = settingsManager;
-            _loginService = new LoginService();
+            _databaseManager = databaseManager;
+            _webConnectorService = webConnectorService;
 
             LoadData();
         }
@@ -61,7 +63,6 @@ namespace Ray.Notification.Wpf.ViewModel
         {
             var settingsInfo = new SettingsInfo
             {
-                ServiceAddress = ServiceAddress,
                 SecondsVisibilityBalloonTime = SecondsVisibilityBalloonTime,
                 ShowBalloonWithNotificationsOpen = ShowBalloonWithNotificationsOpen
             };
@@ -77,30 +78,33 @@ namespace Ray.Notification.Wpf.ViewModel
         {
             try
             {
+                var url = _webConnectorService.GetBaseUrl();
+
                 var notificationView = Application.Current.Windows.OfType<NotificationView>().FirstOrDefault();
 
                 if (notificationView == null) return;
 
-                var loginInfo = LoginBuilder.BuildLogin().ReadLogin();
+                var token = _databaseManager.Store.GetOrDefaultValue(DatabaseConstant.Authorization);
+                if (string.IsNullOrEmpty(token))
+                {
+                    token = _webConnectorService.Get(DatabaseConstant.Authorization, false).Value.ToString();
+                    _databaseManager.Store.Add(DatabaseConstant.Authorization, token);
+                }
 
-                if (loginInfo == null)
-                    throw new ArgumentException("لطفا ابتدا وارد حساب کاربری خود شوید");
-
-                var token = _loginService.GetAuthenticationToken(loginInfo.Username, loginInfo.Password);
-
-                if (token == null)
-                    throw new ArgumentException("با عرض پوزش خطایی به وجود آمده است");
-
-                var connectHub = NotificationHubConnectionBuilder.CreateConnection(serviceAddress, token.AccessToken);
+                var connectHub = NotificationHubConnectionBuilder.CreateConnection(url, token);
 
                 if (connectHub == null)
-                    throw new ArgumentException("با عرض پوزش خطایی به وجود آمده است");
+                {
+                    notificationView.DataContext = new NotificationViewModel(null) { IsConnected = false };
+                }
+                else
+                {
+                    notificationView.DataContext = new NotificationViewModel(connectHub) { IsConnected = true };
 
-                notificationView.DataContext = new NotificationViewModel(connectHub) { IsConnected = true };
+                    var notificationViewModel = (NotificationViewModel)notificationView.DataContext;
 
-                var notificationViewModel = (NotificationViewModel)notificationView.DataContext;
-
-                notificationViewModel.DeletedAllNotification();
+                    notificationViewModel.DeletedAllNotification();
+                }
             }
             catch (Exception ex)
             {
@@ -112,7 +116,6 @@ namespace Ray.Notification.Wpf.ViewModel
         {
             Model = _settingsManager.ReadSettings();
 
-            ServiceAddress = Model.ServiceAddress;
             SecondsVisibilityBalloonTime = Model.SecondsVisibilityBalloonTime;
             ShowBalloonWithNotificationsOpen = Model.ShowBalloonWithNotificationsOpen;
         }

@@ -53,18 +53,17 @@
     <Compile Include="Convertors\PersianDateConvertor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultModel.cs" />
-    <Compile Include="Services\DatabaseService\DatabaseService.cs" />
-    <Compile Include="Services\DatabaseService\LoginService.cs" />
+    <Compile Include="Services\DatabaseManager\DatabaseConstant.cs" />
+    <Compile Include="Services\DatabaseManager\DatabaseManager.cs" />
     <Compile Include="Exceptions\MessageException.cs" />
     <Compile Include="Exceptions\WebConnectorException.cs" />
     <Compile Include="Services\WebConnector\IWebConnectorService.cs" />
     <Compile Include="Services\WebConnector\WebConnectorService.cs" />
+    <Compile Include="Utils\DictionaryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

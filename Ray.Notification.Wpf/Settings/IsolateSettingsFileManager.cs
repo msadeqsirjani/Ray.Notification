@@ -40,9 +40,8 @@ namespace Ray.Notification.Wpf.Settings
 
                     var parts = fileContent.Split(';');
 
-                    result.ServiceAddress = parts[0];
-                    result.SecondsVisibilityBalloonTime = int.Parse(parts[1]);
-                    result.ShowBalloonWithNotificationsOpen = bool.Parse(parts[2]);
+                    result.SecondsVisibilityBalloonTime = int.Parse(parts[0]);
+                    result.ShowBalloonWithNotificationsOpen = bool.Parse(parts[1]);
                 }
             }
 
@@ -74,7 +73,7 @@ namespace Ray.Notification.Wpf.Settings
             {
                 using (var writer = new StreamWriter(isoStream))
                 {
-                    writer.WriteLine($"{settingsInfo.ServiceAddress};{settingsInfo.SecondsVisibilityBalloonTime};{settingsInfo.ShowBalloonWithNotificationsOpen}");
+                    writer.WriteLine($"{settingsInfo.SecondsVisibilityBalloonTime};{settingsInfo.ShowBalloonWithNotificationsOpen}");
                 }
             }
 

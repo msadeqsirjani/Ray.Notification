@@ -1,27 +1,27 @@
 ﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using Ray.Notification.Client;
-using Ray.Notification.Common.Services.LoginService;
-using Ray.Notification.Wpf.Login;
+using Ray.Notification.Common.Services.DatabaseManager;
+using Ray.Notification.Common.Services.WebConnector;
+using Ray.Notification.Common.Utils;
 using Ray.Notification.Wpf.Settings;
-using System;
-using System.Windows;
 
 namespace Ray.Notification.Wpf.ViewModel
 {
     public class ViewModelLocator
     {
-        private readonly LoginService _loginService;
+        private readonly DatabaseManager _databaseManager;
+        private readonly IWebConnectorService _webConnectorService;
 
         public ViewModelLocator()
         {
+            _databaseManager = DatabaseManager.Instance;
+            _webConnectorService = new WebConnectorService();
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<NotificationViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
-
-            _loginService = new LoginService();
         }
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
@@ -33,28 +33,24 @@ namespace Ray.Notification.Wpf.ViewModel
             {
                 try
                 {
-                    var serviceAddress = SettingsBuilder.BuildSettings().ReadSettings().ServiceAddress;
+                    var url = _webConnectorService.GetBaseUrl();
 
-                    var loginInfo = LoginBuilder.BuildLogin().ReadLogin();
+                    var token = _databaseManager.Store.GetOrDefaultValue(DatabaseConstant.Authorization);
+                    if (string.IsNullOrEmpty(token))
+                    {
+                        token = _webConnectorService.Get(DatabaseConstant.Authorization, false).Value.ToString();
+                        _databaseManager.Store.Add(DatabaseConstant.Authorization, token);
+                    }
 
-                    if (loginInfo == null)
-                        return new NotificationViewModel(null);
+                    var connectHub = NotificationHubConnectionBuilder.CreateConnection(url, token);
 
-                    var token = _loginService.GetAuthenticationToken(loginInfo.Username, loginInfo.Password);
-
-                    if (token == null)
-                        throw new ArgumentException("با عرض پوزش خطایی به وجود آمده است");
-
-                    var connectHub = NotificationHubConnectionBuilder.CreateConnection(serviceAddress, token.AccessToken);
-
-                    if (connectHub != null) return new NotificationViewModel(connectHub);
-
-                    throw new ArgumentException("با عرض پوزش خطایی به وجود آمده است");
+                    return connectHub != null
+                        ? new NotificationViewModel(connectHub)
+                        : new NotificationViewModel(null) { IsConnected = false };
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message, "خطا", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return null;
+                    return new NotificationViewModel(null) { IsConnected = false };
                 }
             }
         }
@@ -65,7 +61,7 @@ namespace Ray.Notification.Wpf.ViewModel
             {
                 var settingsManager = SettingsBuilder.BuildSettings();
 
-                return new SettingsViewModel(settingsManager);
+                return new SettingsViewModel(settingsManager, _databaseManager, _webConnectorService);
             }
         }
     }

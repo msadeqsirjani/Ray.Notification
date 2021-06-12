@@ -2,6 +2,6 @@
 {
     public class SettingsGlobalData
     {
-        public static string PathFileSettingsName { get; } = "NotificationSettings.txt";
+        public static string PathFileSettingsName { get; } = "Setting.txt";
     }
 }

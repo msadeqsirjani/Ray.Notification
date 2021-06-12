@@ -30,8 +30,6 @@ namespace Ray.Notification.Wpf.ViewModel
 
         public RelayCommand OpenSettingsViewCommand => new RelayCommand(() => new SettingsView().ShowDialog());
 
-        public RelayCommand OpenLoginViewCommand => new RelayCommand(() => new Views.Login().ShowDialog());
-
         private void OpenNotifications()
         {
             if (_viewNotifications.Visibility != Visibility.Visible)

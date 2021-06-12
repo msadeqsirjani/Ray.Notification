@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR.Client;
+﻿using System;
+using Microsoft.AspNet.SignalR.Client;
 using System.Collections.Generic;
 
 namespace Ray.Notification.Client
@@ -21,7 +22,7 @@ namespace Ray.Notification.Client
             {
                 return new NotificationHubConnection(hubConnection, hubProxy);
             }
-            catch
+            catch(Exception ex)
             {
                 return null;
             }

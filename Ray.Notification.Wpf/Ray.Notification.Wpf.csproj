@@ -175,7 +175,6 @@
     <Compile Include="Login\LoginManager.cs" />
     <Compile Include="Login\LoginBuilder.cs" />
     <Compile Include="Login\LoginGlobalData.cs" />
-    <Compile Include="NotificationModule.cs" />
     <Compile Include="Settings\SettingsBuilder.cs" />
     <Compile Include="Settings\SettingsInfo.cs" />
     <Compile Include="Settings\IsolateSettingsFileManager.cs" />
