@@ -52,15 +52,22 @@ namespace Ray.Notification.Client
 
                 OnFolderContentChanged();
 
-                IsConnect = true;
-
-                Task.WaitAll(HubConnection.Start());
+                Task.WaitAll(OnConnected());
             }
             catch (Exception ex)
             {
                 throw new HubException(
                     $"Error to connect to Service. Check the service is online, and the ServiceAddress is correct. Error:{ex.Message}");
             }
+        }
+
+        private Task OnConnected()
+        {
+            HubConnection.Start();
+
+            IsConnect = HubConnection.State == ConnectionState.Connected;
+
+            return Task.CompletedTask;
         }
 
         private void OnProcessNotification()
