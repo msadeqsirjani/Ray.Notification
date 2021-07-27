@@ -95,6 +95,41 @@ namespace Ray.Notification.Domain
             }
         }
 
-        public string FancyDateTime => PersianDateConvertor.FancyDateDiff(Date, Time);
+        public string FancyDateTime { get; set; }
+
+        public void NavigateToWeb()
+        {
+            switch (DocType)
+            {
+                case DocType.Letter:
+                    {
+                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/9911.4.6/#/letterList/{\"id\":\"" +
+                                                         InstanceId + "\",\"nodeType:\"" + (byte)FolderType + "}");
+                        break;
+                    }
+                case DocType.Draft:
+                    {
+
+                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/9911.4.6/#/DraftList/{\"id\":\"" +
+                                                         InstanceId + "\",\"nodeType:\"" + (byte)FolderType + "}");
+                        break;
+                    }
+                case DocType.Message:
+                    {
+
+                        System.Diagnostics.Process.Start(
+                            "http://office.nrayvarz.ir:8080/9911.4.6/#/MessageList/{\"id\":\"" +
+                            InstanceId + "\",\"nodeType:\"" + (byte)FolderType + "}");
+                        break;
+                    }
+                case DocType.Announcement:
+                    {
+                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/0004.0.0");
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
     }
 }
