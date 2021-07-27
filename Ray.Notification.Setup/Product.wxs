@@ -7,7 +7,7 @@
            UpgradeCode="785F04A9-DA3A-4D35-8144-EC2B39FF63AA">
 
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    <Media Id="1" Cabinet="Ray.Scanner.cab" EmbedCab="yes" CompressionLevel="high" />
+    <Media Id="1" Cabinet="Ray.Notification.cab" EmbedCab="yes" CompressionLevel="high" />
 
     <Icon Id="icon.ico" SourceFile="..\Ray.Notification.Wpf\Images\eoa.ico" />
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
@@ -18,7 +18,7 @@
     <UIRef Id="WixUI_InstallDir" />
     <WixVariable Id="WixUILicenseRtf" Value="..\Ray.Notification.Wpf\Setup\license.rtf" />
 
-    <Feature Id="ProductFeatures" Title="Rayvarz Scanner Windows Service" Level="1">
+    <Feature Id="ProductFeatures" Title="Rayvarz Notification Windows Service" Level="1">
       <ComponentGroupRef Id="Ray_DependencyFiles" />
       <ComponentGroupRef Id="Ray_ConfigFiles" />
       <ComponentRef Id="ApplicationShortcut" />
