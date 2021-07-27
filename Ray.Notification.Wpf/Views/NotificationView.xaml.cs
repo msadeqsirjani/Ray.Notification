@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
@@ -44,7 +45,7 @@ namespace Ray.Notification.Wpf.Views
 
         private void AddListBoxScrollEnding()
         {
-            if(_viewModel == null)
+            if (_viewModel == null)
                 return;
 
             _viewModel.Notifications.CollectionChanged += (sender, e) =>
@@ -106,6 +107,16 @@ namespace Ray.Notification.Wpf.Views
             _viewModel.DeletedAllNotification();
 
             _unClearAllAnimations.Begin();
+        }
+
+        private void ListBoxItemSelected(object sender, RoutedEventArgs e)
+        {
+            var item = e.Source as ListBoxItem;
+            var notification = item.DataContext as Domain.Notification;
+
+            _viewModel.DeletedNotification(notification);
+
+            notification.NavigateToWeb();
         }
     }
 }
