@@ -103,28 +103,28 @@ namespace Ray.Notification.Domain
             {
                 case DocType.Letter:
                     {
-                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/9911.4.6/#/letterList/{\"id\":\"" +
-                                                         InstanceId + "\",\"nodeType:\"" + (byte)FolderType + "}");
+                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/9911.4.6/#/letterView/{\"id\":\"" +
+                                                         InstanceId + "\",\"nodeType\":" + (byte)FolderType + "}");
                         break;
                     }
                 case DocType.Draft:
                     {
 
-                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/9911.4.6/#/DraftList/{\"id\":\"" +
-                                                         InstanceId + "\",\"nodeType:\"" + (byte)FolderType + "}");
+                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/9911.4.6/#/DraftForm/{\"id\":\"" +
+                                                         InstanceId + "\",\"nodeType\":" + (byte)FolderType + "}");
                         break;
                     }
                 case DocType.Message:
                     {
 
                         System.Diagnostics.Process.Start(
-                            "http://office.nrayvarz.ir:8080/9911.4.6/#/MessageList/{\"id\":\"" +
-                            InstanceId + "\",\"nodeType:\"" + (byte)FolderType + "}");
+                            "http://office.nrayvarz.ir:8080/9911.4.6/#/messageView/{\"id\":\"" +
+                            InstanceId + "\",\"nodeType\":" + (byte)FolderType + "}");
                         break;
                     }
                 case DocType.Announcement:
                     {
-                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/0004.0.0");
+                        System.Diagnostics.Process.Start("http://office.nrayvarz.ir:8080/9911.4.6");
                         break;
                     }
                 default:
